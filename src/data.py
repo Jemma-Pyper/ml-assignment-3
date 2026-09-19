@@ -1,4 +1,3 @@
-import numpy as np
 from sklearn.datasets import fetch_covtype
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -100,14 +99,3 @@ def prepare_data(sample_size=50000, random_state=42):
     y_test = y_test - 1
 
     return X_train, X_val, X_test, y_train, y_val, y_test
-
-
-if __name__ == "__main__":
-    # Run a quick check when this file is executed directly.
-    X_train, X_val, X_test, y_train, y_val, y_test = prepare_data()
-
-    print("Training:", X_train.shape, y_train.shape)
-    print("Validation:", X_val.shape, y_val.shape)
-    print("Test:", X_test.shape, y_test.shape)
-
-    print("\nTraining classes:", np.unique(y_train))
