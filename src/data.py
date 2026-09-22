@@ -2,7 +2,6 @@ from sklearn.datasets import fetch_covtype
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-
 def prepare_data(sample_size=50000, random_state=42):
     """
     Load and prepare the Forest Covertype dataset for model development.

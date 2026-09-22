@@ -1,39 +1,72 @@
 import torch
 import torch.nn as nn
 
-
 class FeedforwardNN(nn.Module):
     """
-    Simple feedforward neural network for the Forest Covertype
-    classification problem.
+    Simple feedforward neural network.
 
-    The network contains:
-    - 54 input features
-    - 1 hidden layer
-    - ReLU activation
-    - 7 output neurons, one for each cover type
+    If hidden_size = 0, the model connects the input layer
+    directly to the output layer.
+
+    If hidden_size > 0, the model uses one hidden layer
+    followed by a ReLU activation.
     """
 
-    def __init__(self, input_size=54, hidden_size=16, output_size=7):
+    def __init__(
+        self,
+        input_size=54,
+        hidden_size=16,
+        output_size=7
+    ):
         super().__init__()
 
-        # First layer connects the 54 input features to the hidden layer.
-        # hidden_size is kept as a parameter because the number of hidden
-        # neurons will be tuned during the baseline experiments.
-        self.hidden = nn.Linear(input_size, hidden_size)
+        # Store these values so that the incremental model
+        # can refer to the current architecture later.
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.output_size = output_size
 
-        # ReLU introduces non-linearity so that the network can learn
-        # relationships that cannot be represented by a purely linear model.
-        self.relu = nn.ReLU()
+        # -------------------------------------------------
+        # No hidden layer
+        # -------------------------------------------------
 
-        # Output layer contains one neuron for each of the 7 cover types.
-        self.output = nn.Linear(hidden_size, output_size)
+        if hidden_size == 0:
+
+            self.hidden = None
+            self.relu = None
+
+            # Inputs connect directly to the output neurons.
+            self.output = nn.Linear(
+                input_size,
+                output_size
+            )
+
+        # -------------------------------------------------
+        # One hidden layer
+        # -------------------------------------------------
+
+        else:
+
+            self.hidden = nn.Linear(
+                input_size,
+                hidden_size
+            )
+
+            self.relu = nn.ReLU()
+
+            self.output = nn.Linear(
+                hidden_size,
+                output_size
+            )
 
     def forward(self, x):
-        """
-        Define how data passes through the network.
-        """
 
+        # If there is no hidden layer, send the inputs
+        # directly to the output layer.
+        if self.hidden is None:
+            return self.output(x)
+
+        # Otherwise use the hidden layer and ReLU.
         x = self.hidden(x)
         x = self.relu(x)
         x = self.output(x)
