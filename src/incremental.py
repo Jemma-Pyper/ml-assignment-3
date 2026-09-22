@@ -16,7 +16,7 @@ from train import train_model
 SEED = 42
 
 # Same training settings as the baseline.
-LEARNING_RATE = 0.03
+LEARNING_RATE = 0.1
 BATCH_SIZE = 32
 MAX_EPOCHS = 300
 PATIENCE = 15
