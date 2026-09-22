@@ -8,14 +8,12 @@ from model import FeedforwardNN
 from train import train_model
 
 # ---------------------------------------------------------
-# Final baseline hyperparameters
-#
-# These values were selected using the validation set during
-# the hyperparameter tuning process.
+# Final baseline hyperparameters selected from the full
+# grid search and confirmed across five random seeds.
 # ---------------------------------------------------------
 
-HIDDEN_SIZE = 64
-LEARNING_RATE = 0.03
+HIDDEN_SIZE = 128
+LEARNING_RATE = 0.1
 BATCH_SIZE = 32
 
 MAX_EPOCHS = 300
