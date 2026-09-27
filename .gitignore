@@ -1,3 +1,4 @@
 DECISIONS.md
 __pycache__/
 *.pyc
+.vscode/
