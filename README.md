@@ -84,7 +84,6 @@ The main Python libraries used are:
 - PyTorch
 - scikit-learn
 - NumPy
-- pandas
 - Matplotlib
 
 The exact package requirements are listed in `requirements.txt`.
